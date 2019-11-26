@@ -1,0 +1,30 @@
+{
+  "name": "automata-lab-midterm",
+  "version": "1.0.0",
+  "description": "Automata Lab Midterm",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jamesscn/automata-lab-midterm.git"
+  },
+  "keywords": [
+    "Arduino",
+    "Lab",
+    "Electronics"
+  ],
+  "author": "James Scoon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jamesscn/automata-lab-midterm/issues"
+  },
+  "homepage": "https://github.com/Jamesscn/automata-lab-midterm#readme",
+  "dependencies": {
+    "bluetooth-serial-port": "^2.2.2",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  }
+}

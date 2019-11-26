@@ -1,0 +1,82 @@
+<!doctype html>
+<http>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.dev.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        <link rel="stylesheet" href="index.css">
+        <title>GleGoo Drink Monitor</title>
+    </head>
+    <body>
+        <section class="hero is-dark is-bold is-fullheight">
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <h1 class="title">GleGoo Drink Monitor</h1>
+                    <svg width="200" height="200" id="glass">
+                        <path d="M0 0 L20 0 L55 180 L145 180 L180 0 L200 0 L160 200 L40 200 Z" stroke="white" stroke-width="2" fill="none" id="glassPath"></path>
+                        <path d="M20 0 L55 180 L145 180 L180 0 Z" fill="rgba(0, 178, 255)" id="water"></path>
+                    </svg>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="dash">
+            <div class="container">
+                <div class="tile is-ancestor">
+                    <div class="tile is-vertical">
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification box green is-bold">
+                                <p class="subtitle">Level</p>
+                                <p class="title" id="level">Value</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification box green is-bold">
+                                <p class="subtitle">Chart</p>
+                                <canvas id="levelChart" width="400" height="400"></canvas>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="tile is-vertical">
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification box is-danger is-bold">
+                                <p class="subtitle">Temperature</p>
+                                <p class="title" id="temp">Value</p>
+                            </article>
+                        </div>
+                        <div class="tile is-parent">
+                            <article class="tile is-child notification box is-danger is-bold">
+                                <p class="subtitle">Chart</p>
+                                <canvas id="tempChart" width="400" height="400"></canvas>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile is-ancestor">
+                        <div class="tile is-parent expand" id="mode1">
+                            <article class="tile is-child notification box blue is-bold has-text-centered">
+                                <p class="subtitle">Mode #1</p>
+                                <p>Mixed display</p><br>
+                                <button class="button is-dark" id="btn1">Set</button>
+                            </article>
+                        </div>
+                        <div class="tile is-parent shrink" id="mode2">
+                            <article class="tile is-child notification box yellow is-bold has-text-centered">
+                                <p class="subtitle">Mode #2</p>
+                                <p>Level based display</p><br>
+                                <button class="button" id="btn2">Set</button>
+                            </article>
+                        </div>
+                        <div class="tile is-parent shrink" id="mode3">
+                            <article class="tile is-child notification box is-info is-bold has-text-centered">
+                                <p class="subtitle">Mode #3</p>
+                                <p>Temperature based display</p><br>
+                                <button class="button" id="btn3">Set</button>
+                            </article>
+                        </div>
+                    </div>
+            </div>
+        </section>
+        <script src="index.js"></script>
+    </body>
+</http>
