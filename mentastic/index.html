@@ -1,0 +1,39 @@
+<!doctype html>
+<http>
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="index.css">
+		<title>Mentastic</title>
+	</head>
+	<body>
+		<div id="header">
+			<div id="left">
+				<a href="index.html"><img src="logo.png" width="150px" id="logo"></a>
+				<a href="about.html" class="button">¿Quiénes somos?</a>
+				<a href="pharmacy.html" class="button">Farmacia</a>
+			</div>
+			<div id="right">
+				<a href="index.html" class="button">Registrar</a>
+			</div>
+		</div>
+		<div id="window">
+			<h1>¡Bienvenido a Mentastic!</h1><br>
+			<p>Conectando tus necesidades con profesionales de la salud mental.</p>
+			<form id="form">
+				<p>Usuario</p>
+				<input type="text">
+				<p>Contraseña</p>
+				<input type="password">
+				<p>¿Paciente o especialista?</p>
+				<select id="userclient">
+					<option value="user">Paciente</option>
+					<option value="client">Especialista</option>
+				</select>
+				<p></p>
+				<button id="ucsubmit">Continuar</button>
+			</form>
+		</div>	
+		<script src="index.js"></script>
+		<script src="userclient.js"></script>
+	</body>
+</http>

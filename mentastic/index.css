@@ -1,0 +1,165 @@
+body, div, p, h1, h2, h3, h4, h5, h6, a, b, span {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-image: url("https://i.pinimg.com/originals/ff/aa/ec/ffaaec67775de8126f6524cbe40d35fe.png");
+	background-size: cover;
+}
+
+p, a, b, button, input, select {
+	font-family: 'Roboto', sans-serif;
+	color: white;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	color: white;
+}
+
+a {
+	text-decoration: none;
+}
+
+input, select {
+	padding: 10px;
+	border: 1px solid rgb(36, 36, 36);
+	border-radius: 10px;
+}
+
+button, .button {
+	font-family: 'Varela Round', sans-serif;
+	border: none;
+	border-radius: 10px;
+	padding: 20px;
+	background-color: #3db800;
+	box-shadow: 1px 1px 2px#256e00;
+}
+
+button:hover, .button:hover {
+	background-color: #46d300;
+}
+
+button:active, .button:active {
+	background-color: #46d300;
+	box-shadow: 0px 0px 5px #256e00;
+}
+
+form * {
+	margin: 10px;
+	text-align: center;
+}
+
+#header {
+	display: flex;
+	padding: 20px;
+	background-color: rgba(0, 20, 0, 0.6);
+	box-shadow: 0px 1px 2px #256e00;
+	justify-content: space-between;
+}
+
+#header * {
+	margin-right: 10px;
+	opacity: 1;
+}
+
+#window {
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 50px;
+	padding: 10px;
+	background-color: rgba(0, 20, 0, 0.6);
+	border-radius: 50px;
+	text-align: center;
+	border: 1px solid #308f00;
+}
+
+#window input[type=text], #window input[type=password], #window input[type=date], #window select {
+	color: black;
+}
+
+#window button {
+	color: white;
+}
+
+#left {
+	display: flex;
+	align-items: center;
+}
+
+#right {
+	display: flex;
+	align-items: center;
+}
+
+#search {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+#searchheader {
+	padding: 20px;
+	text-align: center;
+}
+
+#searchheader * {
+	color: black;
+}
+
+.person {
+	display: flex;
+	background-color: rgb(81, 102, 109);
+	box-shadow: 2px 2px 2px rgb(43, 54, 58);
+	padding: 20px;
+	margin: 10px;
+	border-radius: 10px;
+	width: 28%;
+}
+
+.person div {
+	margin-left: 20px;
+}
+
+.person div * {
+	margin-bottom: 10px;
+}
+
+.person h3 {
+	text-align: center;
+	margin-bottom: 10px;
+}
+
+.award {
+	display: flex;
+	background-color: rgb(81, 102, 109);
+	box-shadow: 2px 2px 2px rgb(43, 54, 58);
+	padding: 20px;
+	margin: 10px;
+	border-radius: 10px;
+	width: 28%;
+}
+
+.award img {
+	margin-right: 20px;
+}
+
+.epic {
+    animation: glow 4s infinite;
+}
+
+@keyframes glow {
+    0% {
+        background-color: rgb(128, 68, 0);
+    }
+
+    50% {
+        background-color: rgb(221, 81, 0);
+    }
+
+    100% {
+        background-color: rgb(128, 68, 0);
+    }
+}

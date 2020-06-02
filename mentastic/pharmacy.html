@@ -1,0 +1,37 @@
+<!doctype html>
+<http>
+	<head>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Varela+Round&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="index.css">
+		<title>Mentastic</title>
+	</head>
+	<body>
+		<div id="header">
+			<div id="left">
+				<a href="index.html"><img src="logo.png" width="150px" id="logo"></a>
+				<a href="about.html" class="button">¿Quiénes somos?</a>
+				<a href="pharmacy.html" class="button">Farmacia</a>
+			</div>
+			<div id="right">
+				<a href="index.html" class="button">Registrar</a>
+			</div>
+		</div>
+		<div id="window">
+			<h3>Buscar en la farmacia</h3>
+			<form id="form">
+				<p>Nombre génerico</p>
+				<input type="text">
+				<p>Filtro</p>
+				<select>
+					<option>Más cercano a mi</option>
+					<option>Precio bajo a alto</option>
+					<option>Más unidades</option>
+				</select>
+				<p></p>
+				<button id="farmsubmit">Buscar</button>
+			</form>	
+		</div>
+		<script src="index.js"></script>
+		<script src="pharmacy.js"></script>
+	</body>
+</http>
