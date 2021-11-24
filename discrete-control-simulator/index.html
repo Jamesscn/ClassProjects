@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>Simulador de Plantas Discretas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="Keywords" content="Control Systems, Discrete Plant, Embedded Systems">
+    <meta name="Description" content="A web server that can run on an embedded device or computer and simulate a discrete control system plant.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="admin.css">
+    <script src="https://unpkg.com/vue@next"></script>
+    <script id="MathJax-script" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="icon" href="favicon.png" type="image/png">
+</head>
+<body">
+    <div id="vue-app">
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="/">
+            <h1 class="title is-5">Simulador de Plantas Discretas</h1>
+            </a>
+            <div class="navbar-item">
+                <button class="button mx-1 is-info" v-on:click="menuPlant">Menu de la Planta</button>
+                <button class="button mx-1 is-info" v-on:click="menuControl">Menu del Controlador</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="columns">
+        <nav class="panel column is-one-quarter">
+            
+            <!--
+                Sampling Interval
+            -->
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$T$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="T">
+                <button class="button mx-1 is-primary" v-on:click="updateTime">Actualizar</button>
+            </div>
+
+            <!--
+                Plant Menu
+            -->
+            <div v-if="menu==0">
+            <p class="panel-tabs">
+                <button class="button mx-1 is-info" v-on:click="modelARX">ARX</button>
+                <button class="button mx-1 is-info" v-on:click="modelFO">Primer Orden</button>
+            </p>
+
+            <!--
+                ARX Model
+            -->
+            <div v-if="panel==0">
+            <div class="panel-block">
+                <button class="button mr-2" v-on:click="expandA"><i class="fas fa-chevron-up" ref="AExpandIcon"></i></button>
+                <p class="subtitle">Valores de A</p>
+            </div>
+            <div v-if="expandedA">
+                <div v-for="(item, index) in aValues" class="panel-block">
+                    <p class="button is-static mx-2">$$a_{{ index + 1 }}$$</p>
+                    <input class="input" type="text" placeholder="Ingrese un valor" v-model="item.value">
+                </div>
+                <div class="panel-tabs">
+                    <button class="button mx-1 is-success" v-on:click="insertItem('a')"><i class="fas fa-plus"></i></button>
+                    <button class="button mx-1 is-danger" v-on:click="deleteItem('a')"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <button class="button mr-2" v-on:click="expandB"><i class="fas fa-chevron-up" ref="BExpandIcon"></i></button>
+                <p class="subtitle">Valores de B</p>
+            </div>
+            <div v-if="expandedB">
+                <div v-for="(item, index) in bValues" class="panel-block">
+                    <p class="button is-static mx-2">$$b_{{ index }}$$</p>
+                    <input class="input" type="text" placeholder="Ingrese un valor" v-model="item.value">
+                </div>
+                <div class="panel-tabs">
+                    <button class="button mx-1 is-success" v-on:click="insertItem('b')"><i class="fas fa-plus"></i></button>
+                    <button class="button mx-1 is-danger" v-on:click="deleteItem('b')"><i class="fas fa-minus"></i></button>
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$d$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="d">
+            </div>
+            </div>
+
+            <!--
+                First Order Model
+            -->
+            <div v-if="panel==1">
+                <div class="panel-block">
+                    <p class="button is-static mx-2">$$K$$</p>
+                    <input class="input" type="text" placeholder="Ingrese un valor" v-model="K">
+                </div>
+                <div class="panel-block">
+                    <p class="button is-static mx-2">$$\tau$$</p>
+                    <input class="input" type="text" placeholder="Ingrese un valor" v-model="tau">
+                </div>
+                <div class="panel-block">
+                    <p class="button is-static mx-2">$$\theta'$$</p>
+                    <input class="input" type="text" placeholder="Ingrese un valor" v-model="thetaprime">
+                </div>
+            </div>
+
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$m(k)$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="m">
+            </div>
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$p(k)$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="p">
+            </div>
+            <div class="panel-tabs">
+                <button class="button is-primary" v-on:click="update">Actualizar modelo</button>
+            </div>
+            </div>
+
+            <!--
+                Control Menu
+            -->
+            <div v-if="menu==1">
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$K_c$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="kc">
+            </div>
+
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$\tau_i$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="taui">
+            </div>
+
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$\tau_d$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="taud">
+            </div>
+
+            <div class="panel-block">
+                <p class="button is-static mx-2">$$r(k)$$</p>
+                <input class="input" type="text" placeholder="Ingrese un valor" v-model="rk">
+            </div>
+
+            <p class="panel-tabs">
+                <button class="button mx-1 is-info" v-on:click="controlOn">Activar</button>
+                <button class="button mx-1 is-info" v-on:click="controlOff">Desactivar</button>
+            </p>
+            </div>
+
+            <!--
+                Options
+            -->
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showCMValues">
+                    Mostrar valores de c(k) y m(k)
+                </label>
+            </div>
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showKValues">
+                    Mostrar valores de k
+                </label>
+            </div>
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showReference">
+                    Mostrar línea de referencia
+                </label>
+            </div>
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showLines">
+                    Mostrar líneas de c(k) y m(k)
+                </label>
+            </div>
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showStems">
+                    Mostrar líneas de tallo
+                </label>
+            </div>
+            <div class="panel-block">
+                <label class="checkbox">
+                    <input type="checkbox" v-model="showPerturbations">
+                    Mostrar perturbaciones
+                </label>
+            </div>
+        </nav>
+
+        <div class="column hero is-info">
+            <div class="container">
+                <canvas id="output" width="900" height="300"></canvas>
+                <canvas id="input" width="900" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p><strong>Simulador de plantas discretas</strong> hecho por <a href="https://github.com/Jamesscn/">James Scoon</a> con matrícula A00822125 para la clase de MR2007.1 - Control Computarizado.</p>
+            <p>El código fuente se puede encontrar en mi repositorio de <a href="https://github.com/Jamesscn/ClassProjects/tree/master/discrete-control-simulator">GitHub</a>.</p>
+        </div>
+    </footer>
+    </div>
+    <script src="index.js"></script>
+    <script src="control.js"></script>
+    <script src="outputplot.js"></script>
+    <script src="inputplot.js"></script>
+</body>
+</html>
