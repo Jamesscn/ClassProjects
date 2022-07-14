@@ -1,7 +1,7 @@
 # Carnita Asada
-This is an extra project I am making for Circuits II which will demonstrate the loss of power caused by transporting electricity via wires over long distances and the use of a transformer in order to convert voltages.
+This is an extra project I made for the Circuits II class which demonstrates the loss of power caused by transporting electricity via wires over long distances and the use of a transformer in order to convert voltages.
 
-[Link to the demonstration.](https://jamesscn.github.io/CarnitaAsada/)
+[Link to the demonstration.](https://jamesscn.github.io/ClassProjects/carnita-asada/index.html)
 
 <img src="preview.png" alt="logo" width=600/>
 
